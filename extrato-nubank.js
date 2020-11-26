@@ -43,6 +43,11 @@ NEWFILEUID:NONE
     date.split(' ')[0];
 
   const normalizeMonth = (date) => {
+    // Expected values:
+    // For current year, December: Dez
+    // For past years, December: Dez 19, Dez 18
+    // Dont know if they have other languages
+    
     const month = date.split(' ')[1]
     const months = {
       'Jan': '01',
@@ -63,6 +68,11 @@ NEWFILEUID:NONE
   }
 
   const normalizeYear = (date) => {
+    // Expected values:
+    // For current year, December: Dez
+    // For past years, December: Dez 19, Dez 18
+    // Only interested on the year
+
     const dateArray = date.split(' ');
     if (dateArray.length > 2) {
       return '20'+dateArray[2];
