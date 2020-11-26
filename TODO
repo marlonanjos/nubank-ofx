@@ -1,3 +1,9 @@
-☐ Spends must be an negative value, payments must be a positive number (Budget style) @started(20-11-25 21:15)
-☐ Error loading extension during login
-☐ Allow to export all months
+Todos:
+  ☐ Spends must be an negative value, payments must be a positive number (Budget style) @started(20-11-25 21:15)
+  ☐ Adjust identation on OFX file @started(20-11-25 21:28)
+  ☐ Adjust Button name / Position
+  ☐ Error loading extension during login
+  ☐ Allow to export all months
+  ☐ Bringing transactions outside selected month 
+  ☐ Add more comments to the code @started(20-11-25 21:39)
+

@@ -13,28 +13,28 @@ OLDFILEUID:NONE
 NEWFILEUID:NONE
 
 <OFX>
-<BANKMSGSRSV1>
-<STMTTRNRS>
-<STMTRS>
-<BANKTRANLIST>`;
+  <BANKMSGSRSV1>
+    <STMTTRNRS>
+      <STMTRS>
+        <BANKTRANLIST>`;
   }
 
   const endOfx = () =>
     `
-</BANKTRANLIST>
-</STMTRS>
-</STMTTRNRS>
-</BANKMSGSRSV1>
+        </BANKTRANLIST>
+      </STMTRS>
+    </STMTTRNRS>
+  </BANKMSGSRSV1>
 </OFX>`;
 
   const bankStatement = (date, amount, description) =>
     `
-<STMTTRN>
-<TRNTYPE>OTHER</TRNTYPE>
-<DTPOSTED>${date}</DTPOSTED>
-<TRNAMT>${amount * -1}</TRNAMT>
-<MEMO>${description}</MEMO>
-</STMTTRN>`;
+          <STMTTRN>
+            <TRNTYPE>OTHER</TRNTYPE>
+            <DTPOSTED>${date}</DTPOSTED>
+            <TRNAMT>${amount * -1}</TRNAMT>
+            <MEMO>${description}</MEMO>
+          </STMTTRN>`;
 
   const normalizeAmount = (text) =>
     text.replace('.', '').replace(',','.');
@@ -104,7 +104,7 @@ NEWFILEUID:NONE
     button.classList.add('nu-button');
     button.classList.add('secondary');
     button.setAttribute('role', 'gen-ofx');
-    button.textContent = "Exportar para OFX";
+    button.textContent = "Exportar para OFX+";
 
     button.addEventListener('click', generateOfx)
 
