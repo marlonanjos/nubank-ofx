@@ -108,38 +108,75 @@ NEWFILEUID:NONE
     exportOfx(ofx);
   }
 
-  const createExportButton = () => {
+  const createExportButton = (tabId) => {
     const button = document.createElement('button');
 
     button.classList.add('nu-button');
     button.classList.add('secondary');
-    button.setAttribute('role', 'gen-ofx');
+    button.setAttribute('role', 'gen-ofx-'+tabId);
     button.textContent = "Exportar para OFX+";
 
     button.addEventListener('click', generateOfx)
 
     return button;
   }
-
-  const exportOfxButtonAlreadyExists = () =>
-    document.querySelectorAll(".summary.open [role=\"gen-ofx\"]").length > 0
+  
+  const exportOfxButtonAlreadyExists = (tabId) =>
+    document.querySelectorAll(".summary [role=\"gen-ofx-"+tabId+"\"]").length > 0
 
   const insertExportButtonCallback = (mutationList, observer) => {
-    if(mutationList == undefined || exportOfxButtonAlreadyExists()) return;
+    
+    if(mutationList == undefined) return;
 
-    const generateBoletoButton = document.querySelector('.summary.open .nu-button');
+    
+    for(let mutation of mutationList) {
+      // examine new nodes, is there anything to highlight?
+      
+      
+      if (mutation.target.classList.contains('summary')) {
+        const tab = mutation.target.parentElement.parentElement.id; // expected content_tab_01N
+        if (tab.split('_').length > 2 && tab.split('_')[2].length === 3)
+          tabId = tab.split('_')[2];
+          if(!exportOfxButtonAlreadyExists(tabId)) {
+            const exportOfxButton =  createExportButton(tabId);
+            mutation.target.appendChild(exportOfxButton);
+          }
+      }
+
+
+      /*for(let node of mutation.addedNodes) {
+        // we track only elements, skip other nodes (e.g. text nodes)
+        if (!(node instanceof HTMLElement)) continue;
+        if (node.matches('.summary *')) {
+      
+          console.log(node);
+      
+          // Last node, time to disconnect...
+          if (node.parentNode.classList.contains('open-add')) {
+            observer.disconnect();
+            console.log('Last node, time to disconnect...');
+          }
+        }
+        
+      }*/
+    }
+
+    /*const generateBoletoButton = document.querySelector('.summary .nu-button');
     if (generateBoletoButton == undefined) return;
 
     const exportOfxButton =  createExportButton();
     generateBoletoButton.parentNode.appendChild(exportOfxButton);
-
-    observer.disconnect();
+    */
+    //observer.disconnect();
   }
+  
 
-  const targetElement = document.querySelector('.bills-browser');
-  const config = { attributes: true, childList: true, subtree: true }
 
+  const targetElement = document.querySelector('.ng-scope');
+  const config = { attributes: false, childList: true, subtree: true }
+  
   const observer = new MutationObserver(insertExportButtonCallback);
   observer.observe(targetElement, config)
+  
 })();
 
