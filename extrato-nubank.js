@@ -93,10 +93,12 @@ NEWFILEUID:NONE
     link.click();
   }
 
-  const generateOfx = () => {
+  const generateOfx = (event) => {
+    const tabId = '#content_tab_' + event.target.getAttribute('role').split('-')[2];
+    
     let ofx = startOfx();
-
-    document.querySelectorAll('.charge:not([style=\'display:none\'])').forEach(function(charge){
+    
+    document.querySelectorAll(`${tabId} .charge:not([style='display:none'])`).forEach(function(charge){
       const date = normalizeDate(charge.querySelector('.time').textContent);
       const description = charge.querySelector('.description').textContent.trim();
       const amount = normalizeAmount(charge.querySelector('.amount').textContent);
@@ -130,9 +132,6 @@ NEWFILEUID:NONE
 
     
     for(let mutation of mutationList) {
-      // examine new nodes, is there anything to highlight?
-      
-      
       if (mutation.target.classList.contains('summary')) {
         const tab = mutation.target.parentElement.parentElement.id; // expected content_tab_01N
         if (tab.split('_').length > 2 && tab.split('_')[2].length === 3)
@@ -141,33 +140,17 @@ NEWFILEUID:NONE
             const exportOfxButton =  createExportButton(tabId);
             mutation.target.appendChild(exportOfxButton);
           }
+
+      // Last node, time to disconnect...
+      if (mutation.target.classList.contains('open-add')&&mutation.target.classList.contains('summary')) {
+        observer.disconnect();
+      }
       }
 
 
-      /*for(let node of mutation.addedNodes) {
-        // we track only elements, skip other nodes (e.g. text nodes)
-        if (!(node instanceof HTMLElement)) continue;
-        if (node.matches('.summary *')) {
-      
-          console.log(node);
-      
-          // Last node, time to disconnect...
-          if (node.parentNode.classList.contains('open-add')) {
-            observer.disconnect();
-            console.log('Last node, time to disconnect...');
-          }
-        }
-        
-      }*/
     }
 
-    /*const generateBoletoButton = document.querySelector('.summary .nu-button');
-    if (generateBoletoButton == undefined) return;
 
-    const exportOfxButton =  createExportButton();
-    generateBoletoButton.parentNode.appendChild(exportOfxButton);
-    */
-    //observer.disconnect();
   }
   
 

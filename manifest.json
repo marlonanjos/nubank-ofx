@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "NuBank OFX+",
-  "description": "Adiciona um botão para exportação do extrato em OFX do NuBank em formato otimizado para o YNAB",
+  "description": "Adiciona um botão para exportação do extrato em OFX do NuBank em formato otimizado para o YNAB, onde as compras são consideradas Saídas.",
   "version": "1.0",
   "icons": { "16": "nubank-ofx-16.png",
            "48": "nubank-ofx-48.png",

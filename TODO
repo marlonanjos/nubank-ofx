@@ -1,11 +1,12 @@
 Todos:
-  ☐ Spends must be an negative value, payments must be a positive number (Budget style) @started(20-11-25 21:15)
-  ☐ Adjust identation on OFX file @started(20-11-25 21:28)
-  ☐ Adjust Button name / Position
-  ☐ Error loading extension during login
-  ☐ Allow to export all months
-  ☐ Bringing transactions outside selected month 
-  ☐ Add more comments to the code @started(20-11-25 21:39)
+  ✔ Spends must be an negative value, payments must be a positive number (YNAB Budget style) @started(20-11-25 21:15) @done(20-12-01 20:05) @lasted(5d22h50m14s)
+  ☐ Correct identation on OFX file @started(20-11-25 21:28)
+  ✔ Adjust Button name / Position @done(20-12-01 20:05)
+  ✔ Error loading extension during login @done(20-12-01 20:05)
+  ✘ Allow to export all months @cancelled(20-12-01 21:41)
+  ✔ Bringing transactions outside selected month @done(20-12-01 20:05)
+  ☐ Add more comments to the code
   ☐ Create new Icons
-  ☐ Check if it is failed or not 
+  ✘ Check if it is failed or not @cancelled(20-12-01 21:42)
+  ✔ Charge selector is selecting all loaded charges @done(20-12-01 20:05)
 
